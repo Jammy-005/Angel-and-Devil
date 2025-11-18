@@ -1,0 +1,132 @@
+[gd_scene load_steps=4 format=3 uid="uid://nysgfw83mugi"]
+
+[ext_resource type="Script" uid="uid://dnqmpkxvp8pi3" path="res://title_screen.gd" id="1_v6p8y"]
+[ext_resource type="Script" uid="uid://bxf3fhvmpy8to" path="res://option_button.gd" id="2_ak2if"]
+
+[sub_resource type="GDScript" id="GDScript_v6p8y"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v6p8y")
+
+[node name="StartButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 760.0
+offset_top = 680.0
+offset_right = 1160.0
+offset_bottom = 880.0
+theme_override_font_sizes/font_size = 100
+text = "START"
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 1220.0
+offset_top = 400.0
+offset_right = 1720.0
+offset_bottom = 700.0
+min_value = 1.0
+max_value = 20.0
+value = 4.0
+rounded = true
+
+[node name="Label" type="Label" parent="HSlider"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.080000006
+offset_top = 50.0
+offset_right = 460.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
+script = SubResource("GDScript_v6p8y")
+
+[node name="OptionButton" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 1220.0
+offset_top = 200.0
+offset_right = 1720.0
+offset_bottom = 250.0
+item_count = 4
+popup/item_0/text = "2"
+popup/item_0/id = 0
+popup/item_1/text = "3"
+popup/item_1/id = 1
+popup/item_2/text = "4"
+popup/item_2/id = 2
+popup/item_3/text = "6"
+popup/item_3/id = 3
+script = ExtResource("2_ak2if")
+
+[node name="Label" type="Label" parent="OptionButton"]
+layout_mode = 0
+offset_top = -50.0
+offset_right = 500.0
+offset_bottom = 5.0
+theme_override_font_sizes/font_size = 40
+text = "Number Of Sides"
+vertical_alignment = 1
+
+[node name="SpinBox" type="SpinBox" parent="."]
+layout_mode = 0
+offset_left = 1220.0
+offset_top = 300.0
+offset_right = 1720.0
+offset_bottom = 400.0
+rounded = true
+alignment = 1
+prefix = "Grid Size (0 for infinite)="
+custom_arrow_step = 10.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 150.0
+offset_right = 700.0
+offset_bottom = 250.0
+theme_override_font_sizes/font_size = 60
+text = "CONTROLS"
+
+[node name="Label" type="Label" parent="Label"]
+layout_mode = 0
+offset_top = 100.0
+offset_right = 606.0
+offset_bottom = 600.0
+theme_override_font_sizes/font_size = 40
+text = "SELECT: <mouse click>
+PAN: WASD / <arrow keys>
+ZOOM IN: -
+ZOOM OUT: +
+RETURN TO ANGEL: <spacebar>
+END GAME: R
+"
+
+[node name="CheckButton" type="CheckButton" parent="."]
+layout_mode = 0
+offset_left = 1220.0
+offset_top = 650.0
+offset_right = 1320.0
+offset_bottom = 700.0
+
+[node name="Label" type="Label" parent="CheckButton"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = -5.0
+offset_right = 403.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 40
+text = "Force Euclidean"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
+[connection signal="value_changed" from="HSlider" to="HSlider/Label" method="_on_h_slider_value_changed"]
+[connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]
+[connection signal="value_changed" from="SpinBox" to="." method="_on_spin_box_value_changed"]
+[connection signal="toggled" from="CheckButton" to="." method="_on_check_button_toggled"]
