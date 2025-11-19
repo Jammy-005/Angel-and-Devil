@@ -71,12 +71,12 @@ func set_colour_in_range():
 		
 # Get all tiles within power range, using BFS
 func compute_tiles_in_range(dist, generate):
-	if FORCE_EUCLIDEAN or ADJACENT == 4:
+	if FORCE_EUCLIDEAN or ADJACENT == 2 or ADJACENT == 6:
+		_compute_tiles_in_range(int(floor(dist)), generate)
+	elif ADJACENT == 4:
 		_compute_tiles_in_chessboard(dist, generate)
 	elif ADJACENT == 3:
 		_compute_tiles_in_triangle(int(floor(dist)), generate)
-	elif ADJACENT == 2 or ADJACENT == 6:
-		_compute_tiles_in_range(int(floor(dist)), generate)
 
 # Get all tiles within power range (Manhatten distance)
 func _compute_tiles_in_range(dist, generate):
